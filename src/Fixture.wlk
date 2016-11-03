@@ -39,15 +39,15 @@ object fixture {
 	}
 
 	method silvina() {
-		return new Plomero()
+		return new Plomero(2011)
 	}
 	
 	method dodain(){
-		return new Albanil(3)
+		return new Albanil(3, 2012)
 	}
 
 	method noelia() {
-		return new Electricista(250)
+		return new Electricista(250, 2014)
 	}
 	method habitacion1() {
 		return new Ambiente(4, 3, 3)

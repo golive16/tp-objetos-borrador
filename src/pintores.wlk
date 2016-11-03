@@ -2,6 +2,8 @@ import pintura.*
 
 object raul {
 	
+	var fecha = new Date()
+	var anioInicioActividad = 2011
 	var pintura
 	var clientes = []
 	
@@ -10,7 +12,9 @@ object raul {
 	}
 	
 	method costoServicio(casa){
-		return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
+		if (self.antiguedad() == 2) {
+			return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) * 0.5			
+		} return return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
 	}
 	
 	method pintura(_pintura){
@@ -24,11 +28,14 @@ object raul {
 	method clientes(){
 		return clientes
 	}
-	
+	method antiguedad(){
+		return fecha.year() - anioInicioActividad
+	}
 }
 
 object carlos {
-	
+	var fecha = new Date()
+	var anioInicioActividad = 2013
 	var pintura
 	var clientes = []
 
@@ -42,8 +49,9 @@ object carlos {
 	}
 	
 	method costoServicio(casa){
-		return self.manoDeObra(casa.superficie()) 
-		
+		if (self.antiguedad() == 2) {
+			return self.manoDeObra(casa.superficie())  * 0.5			
+		} return self.manoDeObra(casa.superficie()) 
 	}
 	
 	method pintura(_pintura){
@@ -57,10 +65,14 @@ object carlos {
 	method clientes(){
 		return clientes
 	}
+	method antiguedad(){
+		return fecha.year() - anioInicioActividad
+	}
 }
 
 object venancio {
-	
+	var fecha = new Date()
+	var anioInicioActividad = 2012
 	var pintura
 	var clientes = []
 
@@ -74,7 +86,9 @@ object venancio {
 	}
 	
 	method costoServicio(casa){
-		return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
+		if (self.antiguedad() == 2) {
+			return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) * 0.5			
+		} return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) 		
 	}
 	
 	method pintura(_pintura){
@@ -87,6 +101,9 @@ object venancio {
 	
 	method clientes(){
 		return clientes
+	}
+	method antiguedad(){
+		return fecha.year() - anioInicioActividad
 	}
 }
  

@@ -13,7 +13,11 @@ class Arquitecto {
 	}
 	
 	method costoServicio(casa){
-		return casa.ambientes().size() * costoPorAmbiente * casa.pisos() * (self.antiguedad() / 100)
+		return  self.manoDeObra(casa) + (self.manoDeObra(casa) * (self.antiguedad() / 100))
+	}
+	
+	method manoDeObra(casa) {
+		return casa.ambientes().size() * costoPorAmbiente * casa.pisos()
 	}
 	
 	method costoPorAmbiente(_costoPorAmbiente){

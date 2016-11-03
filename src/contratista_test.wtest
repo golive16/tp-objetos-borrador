@@ -44,7 +44,7 @@ test "Milena solo puede contratar a Silvina " {
 	
 	milena.casa(fixture.casaDeMilena())
 	milena.ahorros(2000)
-	var silvina = new Plomero()
+	var silvina = new Plomero(2011)
 		silvina.recargo(25)
 	
 	agencia.contratar(silvina)
@@ -59,10 +59,10 @@ test "Damian puede contratar a Noelia, Silvina y Dodain "{
 	
 	damian.casa(fixture.casaDeDamian())
 	damian.ahorros(250000)
-	var noelia = new Electricista(250)
-	var silvina = new Plomero()
+	var noelia = new Electricista(250, 2012)
+	var silvina = new Plomero(2011)
 		silvina.recargo(25)
-	var dodain = new Albanil(3)
+	var dodain = new Albanil(3, 2013)
 	
 	agencia.contratar(noelia)
 	agencia.contratar(silvina)
@@ -81,7 +81,7 @@ test "Damian ahorra 1500000, contrata a Eliana y Silvina y No es descuidado"{
 	damian.casa(fixture.casaDeDamian())
 	damian.ahorros(1500000)
 	
-	var silvina = new Plomero()
+	var silvina = new Plomero(2014)
 		silvina.recargo(25)
 	var eliana = fixture.eliana()
 	
@@ -101,7 +101,7 @@ test "Milena ahorra $1500000, contrata a Eliana y a Silvina, Damian Si fue descu
 	milena.ahorros(1500000)
 	milena.agencia(agencia)
 	var eliana = new MMdeObras(12000, 2014)
-	var silvina = new Plomero()
+	var silvina = new Plomero(2015)
 		silvina.recargo(25)
 	agencia.contratar(eliana)
 	agencia.contratar(silvina)
@@ -118,7 +118,7 @@ test "Milena contrata 2 veces a  Eliana y a Silvina"{
 	milena.ahorros(1500000)
 	milena.agencia(agencia)
 	
-	var silvina = new Plomero()
+	var silvina = new Plomero(2015)
 		silvina.recargo(25)
 	var eliana = fixture.eliana()
 	
@@ -142,7 +142,7 @@ test "Damian contrata a dodain y a Silvina y Dodain NO lo tomó de punto"{
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 	
-	var silvina = new Plomero()
+	var silvina = new Plomero(2015)
 		silvina.recargo(25)
 		
 	var dodain = fixture.dodain()
@@ -161,7 +161,7 @@ test "Damian contrata Dodain, a Silvina y nuevamente a Dodain y Dodain lo tomo d
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 	
-	var silvina = new Plomero()
+	var silvina = new Plomero(2014)
 	silvina.recargo(25)
 	var dodain = fixture.dodain()
 	
@@ -182,9 +182,9 @@ test "Damian contrate a Dodain, luego a Silvina y nuevamente a Dodain. Saber cua
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 
-	var silvina = new Plomero() 
+	var silvina = new Plomero(2014) 
 		silvina.recargo(25)
-	var dodain = new Albanil(3) 
+	var dodain = new Albanil(3, 2012) 
 	
 	agencia.contratar(silvina)
 	agencia.contratar(dodain)

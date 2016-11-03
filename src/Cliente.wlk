@@ -1,7 +1,6 @@
 import Casa.*
 
 class Cliente {
-	
 	var ahorros
 	var casa
 	var gastos = []

@@ -10,46 +10,8 @@ import MMdeObras.*
 import Plomero.*
 import Electricista.*
 import Albanil.*
+import FixtureDeAldo.*
 
-object fixture {
-	
-  method aumentarAhorro(aldo, ahorro){
-  	 aldo.ahorros(aldo.ahorros() + ahorro)
-  }
-  
-  method aumentarPrecioLataPintura(pintura, nuevoPrecio){
-  	pintura.precio(nuevoPrecio)
-  }
-  
-  method aldoConAhorrosYCasa(){
-  	aldo.ahorros(6000)
-	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
-  }
-  
-  method agencia(){
-  	var emanuel = new Arquitecto(100000, 2011)
-  	var marcos = new MMdeObras(50000, 2011)
-  	var noelia = new Electricista(250)
-  	var silvana = new Plomero()
-	  	silvana.recargo(25)
-  	var eliana = new MMdeObras(12000, 2012)
-  	var dodain = new Albanil(3)
-	raul.pintura(pintura)
-  	agencia.contratar(raul)
-  	carlos.pintura(pintura)
-  	agencia.contratar(carlos)
-  	venancio.pintura(pintura)
-  	agencia.contratar(venancio)
-  	agencia.contratar(emanuel)
-  	agencia.contratar(marcos)
-  	agencia.contratar(noelia)
-  	agencia.contratar(silvana)
-  	agencia.contratar(eliana)
-  	agencia.contratar(dodain)
-
-  }
-  
-}
 
 test "la superficie total a pintar por aldo es 41" {
 	fixture.aldoConAhorrosYCasa()
@@ -118,8 +80,8 @@ test "Aldo puede contratar a Carlos, Eduardo y Roger"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
 	
-	var roger =  new Plomero()
-	var eduardo = new Electricista(100)
+	var roger =  new Plomero(2010)
+	var eduardo = new Electricista(100, 2012)
 	fixture.agencia()
 	agencia.contratar(roger)
 	agencia.contratar(eduardo)
@@ -135,7 +97,7 @@ test "Aldo puede contratar a Carlos, Eduardo y Roger"{
 test "Aldo contrata a roger y su presupuesto maximo ahora es 1160" {
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero()
+	var roger =  new Plomero(2012)
 	agencia.contratar(roger)
 	aldo.contratar(roger)
 	assert.equals(1160, aldo.presupuesto())
@@ -144,7 +106,7 @@ test "Aldo contrata a roger y su presupuesto maximo ahora es 1160" {
 test "Aldo contrata a Roger y a Carlos, obtiene 2 servicios" {
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero()
+	var roger =  new Plomero(2012)
 	agencia.contratar(roger)
 	agencia.contratar(carlos)
 	var contratados = aldo.agencia().puedeContratarA(aldo.presupuesto(), aldo.casa())
@@ -163,7 +125,7 @@ test "Aldo no puede contratar a Marcos, no tiene presupuesto"{
 test "Aldo contrata a Roger y a Carlos y no es descuidado"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero()
+	var roger =  new Plomero(2012)
 	agencia.contratar(roger)
 	carlos.pintura(pintura)
 	agencia.contratar(carlos)

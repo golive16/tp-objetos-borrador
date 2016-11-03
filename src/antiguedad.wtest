@@ -12,6 +12,20 @@ test "Marcelo es Arquitecto, tiene 3 años de antiguedad y cuanto le cobra a Dami
 	var marcelo = new Arquitecto(50000, 2013)
 	var casaDeDamian = fixture.casaDeDamian()
 	assert.equals(3, marcelo.antiguedad())
-	assert.equals(24000, marcelo.costoServicio(casaDeDamian))
+	assert.equals(824000, marcelo.costoServicio(casaDeDamian))
 
+}
+
+test "Marcos es MMdeObras con 5 años de experiencia y cuanto le cobra a Damian" {
+	var marcos = new MMdeObras(50000, 2011)
+	var casaDeDamian = fixture.casaDeDamian()
+	assert.equals(264000, marcos.costoServicio(casaDeDamian))
+	
+}
+
+test "Pablo es MMdeObras con 10 años de experiencia y cuanto le cobra a Milena" {
+	var pablo = new MMdeObras(50000, 2006)
+	var casaDeMilena = fixture.casaDeMilena()
+	assert.equals(110000, pablo.costoServicio(casaDeMilena))
+	
 }
