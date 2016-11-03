@@ -1,0 +1,32 @@
+import pinturaGranel.*
+import pintores.*
+import Aldo.*
+import Casa.*
+import Ambiente.*
+
+test "El costo de la pintura de una superficie de 10m2 es 35" {
+
+	assert.equals(35,pinturaGranel.costoPorSuperficie(10))
+
+}
+
+test "El costo de la pintura de una superficie de 250m2 es 875" {
+
+	assert.equals(875, pinturaGranel.costoPorSuperficie(250))
+
+}
+
+test "Aldo si puede contratar a Raúl si Raúl trabaja con pintura a granel" {
+	aldo.ahorros(6000)
+	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
+	raul.pintura(pinturaGranel)
+	assert.that(aldo.tienePresupuestoPara(raul))
+}
+
+test "Aldo no puede contratar a Venancio cuando trabaja con pintura a granel" {
+	aldo.ahorros(6000)
+	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
+	venancio.pintura(pinturaGranel)
+	assert.notThat(aldo.tienePresupuestoPara(venancio))
+}
+

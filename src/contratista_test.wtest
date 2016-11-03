@@ -1,0 +1,207 @@
+import Aldo.*
+import pintores.*
+import pintura.*
+import Cliente.*
+import Casa.*
+import Ambiente.*
+import Agencia.*
+import Arquitecto.*
+import MMdeObras.*
+import Plomero.*
+import Electricista.*
+import Albanil.*
+import Damian.*
+import Milena.*
+import Fixture.*
+
+test "El Costo de Noelia para la casa de Damian" {
+	var noelia = fixture.noelia()
+	var casaDeDamian = fixture.casaDeDamian()
+	assert.equals(2000, noelia.costoServicio(casaDeDamian))
+
+}
+
+test "El Costo de Silvina para la casa de Damian" {
+	var silvina = fixture.silvina()
+	silvina.recargo(25)
+	var casaDeDamian = fixture.casaDeDamian()
+	assert.equals(500, silvina.costoServicio(casaDeDamian))
+}
+
+test "El Costo de Noelia para la casa de Milena" {
+	var noelia = fixture.noelia()
+	var casaDeMilena = fixture.casaDeMilena()
+	assert.equals(500, noelia.costoServicio(casaDeMilena))
+}
+
+test "El Costo de Eliana para la casa de Damian" {
+	var eliana = fixture.eliana()
+	var casaDeDamian = fixture.casaDeDamian()
+	assert.equals(57600, eliana.costoServicio(casaDeDamian))
+}
+
+test "Milena solo puede contratar a Silvina " {
+	
+	milena.casa(fixture.casaDeMilena())
+	milena.ahorros(2000)
+	var silvina = new Plomero()
+		silvina.recargo(25)
+	
+	agencia.contratar(silvina)
+
+	var contratados = agencia.puedeContratarA(milena.presupuesto(), milena.casa())
+	
+	assert.equals(1, contratados.size())
+	assert.that(contratados.contains(silvina))
+}
+
+test "Damian puede contratar a Noelia, Silvina y Dodain "{
+	
+	damian.casa(fixture.casaDeDamian())
+	damian.ahorros(250000)
+	var noelia = new Electricista(250)
+	var silvina = new Plomero()
+		silvina.recargo(25)
+	var dodain = new Albanil(3)
+	
+	agencia.contratar(noelia)
+	agencia.contratar(silvina)
+	agencia.contratar(dodain)
+	
+	var contratados = agencia.puedeContratarA(damian.presupuesto(), damian.casa())
+	
+	assert.equals(3, contratados.size())
+	assert.that(contratados.contains(noelia))
+	assert.that(contratados.contains(silvina))
+	assert.that(contratados.contains(dodain))
+}
+
+test "Damian ahorra 1500000, contrata a Eliana y Silvina y No es descuidado"{
+	
+	damian.casa(fixture.casaDeDamian())
+	damian.ahorros(1500000)
+	
+	var silvina = new Plomero()
+		silvina.recargo(25)
+	var eliana = fixture.eliana()
+	
+	agencia.contratar(silvina)
+	agencia.contratar(eliana)
+	
+	damian.agencia(agencia)
+	
+	damian.contratar(silvina)
+	damian.contratar(eliana)
+	
+	assert.notThat(damian.descuidado())
+}
+
+test "Milena ahorra $1500000, contrata a Eliana y a Silvina, Damian Si fue descuidado" {
+	milena.casa(fixture.casaDeMilena())
+	milena.ahorros(1500000)
+	milena.agencia(agencia)
+	var eliana = new MMdeObras(12000, 2014)
+	var silvina = new Plomero()
+		silvina.recargo(25)
+	agencia.contratar(eliana)
+	agencia.contratar(silvina)
+	var contratados = agencia.puedeContratarA(milena.presupuesto(), milena.casa())
+	assert.equals(2, contratados.size())
+	assert.that(contratados.contains(eliana))
+	assert.that(contratados.contains(silvina))
+	assert.notThat(damian.descuidado())
+}
+
+test "Milena contrata 2 veces a  Eliana y a Silvina"{
+	
+	milena.casa(fixture.casaDeMilena())
+	milena.ahorros(1500000)
+	milena.agencia(agencia)
+	
+	var silvina = new Plomero()
+		silvina.recargo(25)
+	var eliana = fixture.eliana()
+	
+	agencia.contratar(silvina)
+	agencia.contratar(eliana)
+	
+	milena.contratar(silvina)
+	milena.contratar(eliana)
+	milena.contratar(eliana)
+	
+	var contratados = milena.contratistas()
+	
+	assert.equals(3, contratados.size())
+	assert.that(contratados.contains(silvina))
+	assert.that(contratados.contains(eliana))
+	
+}
+
+test "Damian contrata a dodain y a Silvina y Dodain NO lo tomó de punto"{
+	damian.casa(fixture.casaDeDamian())
+	damian.ahorros(250000)
+	damian.agencia(agencia)
+	
+	var silvina = new Plomero()
+		silvina.recargo(25)
+		
+	var dodain = fixture.dodain()
+	
+	agencia.contratar(dodain)
+	agencia.contratar(silvina)
+	
+	damian.contratar(dodain)
+	damian.contratar(silvina)
+	
+	assert.notThat(damian.tomoDePunto(dodain))
+}
+
+test "Damian contrata Dodain, a Silvina y nuevamente a Dodain y Dodain lo tomo de punto"{
+	damian.casa(fixture.casaDeDamian())
+	damian.ahorros(250000)
+	damian.agencia(agencia)
+	
+	var silvina = new Plomero()
+	silvina.recargo(25)
+	var dodain = fixture.dodain()
+	
+	agencia.contratar(dodain)
+	agencia.contratar(silvina)
+	
+	damian.contratar(dodain)
+	damian.contratar(silvina)
+	damian.contratar(dodain)
+	
+	assert.that(damian.tomoDePunto(dodain))
+}
+
+
+test "Damian contrate a Dodain, luego a Silvina y nuevamente a Dodain. Saber cuanto le pago a Dodain"
+{
+	damian.casa(fixture.casaDeDamian())
+	damian.ahorros(250000)
+	damian.agencia(agencia)
+
+	var silvina = new Plomero() 
+		silvina.recargo(25)
+	var dodain = new Albanil(3) 
+	
+	agencia.contratar(silvina)
+	agencia.contratar(dodain)
+
+	damian.contratar(dodain)
+	damian.contratar(silvina)
+	damian.contratar(dodain)
+	
+	var fecha =  new Date()
+
+	assert.equals(9600, damian.montoTrabajosRealizados(fecha, dodain))
+
+}
+
+
+
+
+
+
+

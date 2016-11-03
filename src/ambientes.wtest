@@ -1,0 +1,21 @@
+import Aldo.*
+import Ambiente.*
+
+object fixture {
+	
+	method cocina(){
+		return new Ambiente(1,2,3.5)
+	}
+}
+
+test "la habitacion tiene una superficie de 20m2 " {
+
+	assert.equals(20, habitacion.superficie())
+
+}
+
+test "la cocina tiene una superficie de 21m2 " {
+
+	assert.equals(21, fixture.cocina().superficie())
+
+}

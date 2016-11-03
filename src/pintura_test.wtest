@@ -1,0 +1,31 @@
+import pintura.*
+
+test "se necesitan 6 latas de pintura para pintar 251m2" {
+	
+	assert.equals(6, pintura.cantLatasPorSuperficie(251))	
+
+}
+
+test "se necesitan 5 latas de pintura para pintar 250m2" {
+	
+	assert.equals(5, pintura.cantLatasPorSuperficie(250))	
+
+}
+
+test "se necesitan 5 latas de pintura para pintar 249m2" {
+	
+	assert.equals(5, pintura.cantLatasPorSuperficie(249))	
+
+}
+
+test "pintar una superficie de 10m2 cuesta 200" {
+	
+	assert.equals(200, pintura.costoPorSuperficie(10))	
+
+}
+
+test "pintar una superficie de 250m2 cuesta 1000" {
+	
+	assert.equals(1000, pintura.costoPorSuperficie(250))	
+
+}

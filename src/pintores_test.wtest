@@ -1,0 +1,56 @@
+import pintores.*
+import pintura.*
+import Casa.*
+import Aldo.*
+import Ambiente.*
+
+object fixture{
+	
+	method casaCon20MetrosDeSuperficie(){
+		return new Casa(1,[habitacion])
+	}
+	
+	method casaCon32MetrosDeSuperficie(){
+		return new Casa(1,[habitacion, new Ambiente(3,3,1)])
+	}
+}
+
+test "Raul cobra 500 por pintar 20m2" {
+
+	raul.pintura(pintura)
+	assert.equals(500, raul.manoDeObra(20))
+
+}
+
+test "Raul cobra 700 de mano de obra y pintura por pintar 20m2" {
+	raul.pintura(pintura)
+	assert.equals(700, raul.costoServicio(fixture.casaCon20MetrosDeSuperficie()))
+
+}
+
+test "Carlos cobra 500 de mano de obra y pintura por pintar 20m2" {
+	carlos.pintura(pintura)
+	assert.equals(500, carlos.costoServicio(fixture.casaCon20MetrosDeSuperficie()))
+
+}
+
+
+test "Carlos cobra 860 de mano de obra y pintura por pintar 32m2" {
+	carlos.pintura(pintura)
+	assert.equals(860, carlos.costoServicio(fixture.casaCon32MetrosDeSuperficie()))
+
+}
+
+
+test "Venancio cobra 880 de mano de obra por pintar 32m2" {
+	assert.equals(880, venancio.manoDeObra(32))
+}
+
+test "Venancio cobra 440 de mano de obra por pintar 20m2" {
+	assert.equals(440, venancio.manoDeObra(20))
+}
+
+test "Venancio cobra 1080 de mano de obra y pintura por pintar 32m2" {
+	venancio.pintura(pintura)
+	assert.equals(1080, venancio.costoServicio(fixture.casaCon32MetrosDeSuperficie()))
+}
