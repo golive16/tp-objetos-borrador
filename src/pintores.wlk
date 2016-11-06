@@ -6,6 +6,7 @@ object raul {
 	var anioInicioActividad = 2011
 	var pintura
 	var clientes = []
+	var complejidadRol = 2
 	
 	method manoDeObra(superficie){
 		return superficie * 25
@@ -31,6 +32,9 @@ object raul {
 	method antiguedad(){
 		return fecha.year() - anioInicioActividad
 	}
+	method complejidad() {
+		return complejidadRol
+	}
 }
 
 object carlos {
@@ -38,6 +42,7 @@ object carlos {
 	var anioInicioActividad = 2013
 	var pintura
 	var clientes = []
+	var complejidadRol = 2
 
 	method manoDeObra(superficie){
 		
@@ -68,6 +73,9 @@ object carlos {
 	method antiguedad(){
 		return fecha.year() - anioInicioActividad
 	}
+	method complejidad() {
+		return complejidadRol
+	}
 }
 
 object venancio {
@@ -75,6 +83,7 @@ object venancio {
 	var anioInicioActividad = 2012
 	var pintura
 	var clientes = []
+	var complejidadRol = 2
 
 	method manoDeObra(superficie){
 		
@@ -104,6 +113,9 @@ object venancio {
 	}
 	method antiguedad(){
 		return fecha.year() - anioInicioActividad
+	}
+	method complejidad() {
+		return complejidadRol
 	}
 }
  

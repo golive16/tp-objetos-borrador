@@ -4,6 +4,7 @@ class Electricista {
 	var anioInicioActividad
 	var costoPorAmbiente
 	var clientes = []
+	var complejidadRol = 2
 	
 	constructor(_costoPorAmbiente, _anioInicioActividad){
 		costoPorAmbiente = _costoPorAmbiente
@@ -29,6 +30,10 @@ class Electricista {
 	
 	method costoPorAmbiente(){
 		return costoPorAmbiente
+	}
+	
+	method complejidad() {
+		return complejidadRol
 	}
 	
 	method clientes(){

@@ -5,6 +5,8 @@ class Plomero {
 	var recargo = 0
 	var costoPorAmbiente = 100
 	var clientes = []
+	var complejidadRol = 2
+	
 	constructor(_anioInicioActividad) {
 		anioInicioActividad = _anioInicioActividad
 	}
@@ -28,6 +30,10 @@ class Plomero {
 	
 	method recargo(_recargo){
 		recargo = _recargo
+	}
+	
+	method complejidad() {
+		return complejidadRol
 	}
 	
 	method recargo(){

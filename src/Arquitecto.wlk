@@ -1,11 +1,14 @@
 import Casa.*
 import Ambiente.*
+import Experiencia.*
 
 class Arquitecto {
 	var fecha = new Date()
 	var anioInicioActividad
 	var costoPorAmbiente
 	var clientes = []
+	var complejidadRol = 5
+	var experiencia
 	
 	constructor(_costoPorAmbiente, _anioInicioActividad){
 		costoPorAmbiente = _costoPorAmbiente
@@ -34,6 +37,8 @@ class Arquitecto {
 	method antiguedad(){
 		return fecha.year() - anioInicioActividad
 	}
-
+	method complejidad(){
+		return complejidadRol
+	}
 	
 }

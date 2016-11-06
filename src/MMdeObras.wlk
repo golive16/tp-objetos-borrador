@@ -4,6 +4,7 @@ class MMdeObras {
 	var anioInicioActividad
 	var costoPorAmbiente
 	var clientes = []
+	var complejidadRol = 3
 	
 	constructor(_costoPorAmbiente, _anioInicioActividad){
 		costoPorAmbiente = _costoPorAmbiente
@@ -35,6 +36,9 @@ class MMdeObras {
 	
 	method clientes(){
 		return clientes
+	}
+	method complejidad() {
+		return complejidadRol
 	}
 	
 	method antiguedad(){

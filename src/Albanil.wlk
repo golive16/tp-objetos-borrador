@@ -4,6 +4,7 @@ class Albanil {
 	var clientes = []
 	var costoPorHora = 50 
 	var diasPromedio = 0
+	var complejidadRol = 1 
 	
 	constructor(_diasPromedio, _anioInicioActividad) {
 		diasPromedio = _diasPromedio
@@ -25,5 +26,8 @@ class Albanil {
 	} 
 	method antiguedad(){
 		return fecha.year() - anioInicioActividad
+	}
+	method complejidad() {
+		return complejidadRol
 	}
 }
