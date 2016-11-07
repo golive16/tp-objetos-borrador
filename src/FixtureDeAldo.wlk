@@ -29,13 +29,13 @@ object fixture {
   }
   
   method agencia(){
-  	var emanuel = new Arquitecto(100000, 2011)
-  	var marcos = new MMdeObras(50000, 2011)
-  	var noelia = new Electricista(250, 2012)
-  	var silvana = new Plomero(2015)
+  	var emanuel = new Arquitecto(100000)
+  	var marcos = new MMdeObras(50000)
+  	var noelia = new Electricista(250)
+  	var silvana = new Plomero()
 	  	silvana.recargo(25)
-  	var eliana = new MMdeObras(12000, 2012)
-  	var dodain = new Albanil(3, 2013)
+  	var eliana = new MMdeObras(12000)
+  	var dodain = new Albanil(3)
 	raul.pintura(pintura)
   	agencia.contratar(raul)
   	carlos.pintura(pintura)

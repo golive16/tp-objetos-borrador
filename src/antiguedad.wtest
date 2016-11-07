@@ -2,30 +2,36 @@ import MMdeObras.*
 import Arquitecto.*
 import Fixture.*
 
-test "Marcos es MMdeObras y tiene 5 años de antiguedad" {
-	var marcos = new MMdeObras(50000, 2011)
-	assert.equals(5, marcos.antiguedad())
+test "Eliana es MMdeObras y tiene 5 años de antiguedad" {
+	var eliana = fixture.eliana()
+	var fecha = fixture.anioInicioActividadDeEliana()
+	eliana.anioInicioActividad(fecha)
+	assert.equals(5, eliana.antiguedad())
 
 }
 
-test "Marcelo es Arquitecto, tiene 3 años de antiguedad y cuanto le cobra a Damian por su casa" {
-	var marcelo = new Arquitecto(50000, 2013)
+test "Marcos es Arquitecto, Experimentado, tiene 3 años de antiguedad y le cobra XXXX a Damian por su casa" {
+	var marcos = new Arquitecto(50000)
+	var fecha = fixture.anioInicioActividadDeMarcos()
 	var casaDeDamian = fixture.casaDeDamian()
-	assert.equals(3, marcelo.antiguedad())
-	assert.equals(824000, marcelo.costoServicio(casaDeDamian))
+	marcos.anioInicioActividad(fecha)
+	marcos.experticia()
+	marcos.antiguedad()
+	assert.equals(3, marcos.antiguedad())
+	assert.equals(824000, marcos.costoServicio(casaDeDamian))
 
 }
 
-test "Marcos es MMdeObras con 5 años de experiencia y cuanto le cobra a Damian" {
-	var marcos = new MMdeObras(50000, 2011)
-	var casaDeDamian = fixture.casaDeDamian()
-	assert.equals(264000, marcos.costoServicio(casaDeDamian))
-	
-}
-
-test "Pablo es MMdeObras con 10 años de experiencia y cuanto le cobra a Milena" {
-	var pablo = new MMdeObras(50000, 2006)
-	var casaDeMilena = fixture.casaDeMilena()
-	assert.equals(110000, pablo.costoServicio(casaDeMilena))
-	
-}
+//test "Marcos es MMdeObras con 5 años de experiencia y cuanto le cobra a Damian" {
+//	var marcos = new MMdeObras(50000)
+//	var casaDeDamian = fixture.casaDeDamian()
+//	assert.equals(264000, marcos.costoServicio(casaDeDamian))
+//	
+//}
+//
+//test "Pablo es MMdeObras con 10 años de experiencia y cuanto le cobra a Milena" {
+//	var pablo = new MMdeObras(50000)
+//	var casaDeMilena = fixture.casaDeMilena()
+//	assert.equals(110000, pablo.costoServicio(casaDeMilena))
+//	
+//}

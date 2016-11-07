@@ -14,11 +14,19 @@ import Damian.*
 import Milena.*
 
 object fixture {
+	
+	method anioInicioActividadDeEliana(){
+		return 2011
+	}
 
+	method anioInicioActividadDeMarcos(){
+		return 2013
+	}
+	
 	method agencia() {
-		var emanuel = new Arquitecto(100000, 2011)
-		var marcos = new MMdeObras(50000, 2011)
-		var eliana = new MMdeObras(12000, 2013)
+		var emanuel = new Arquitecto(100000)
+		var marcos = new MMdeObras(50000)
+		var eliana = new MMdeObras(12000)
 		raul.pintura(pintura)
 		agencia.contratar(raul)
 		carlos.pintura(pintura)
@@ -35,19 +43,19 @@ object fixture {
 		return milena
 	}
 	method eliana() {
-		return new MMdeObras(12000, 20140901)
+		return new MMdeObras(12000)
 	}
 
 	method silvina() {
-		return new Plomero(2011)
+		return new Plomero()
 	}
 	
 	method dodain(){
-		return new Albanil(3, 2012)
+		return new Albanil(3)
 	}
 
 	method noelia() {
-		return new Electricista(250, 2014)
+		return new Electricista(250)
 	}
 	method habitacion1() {
 		return new Ambiente(4, 3, 3)
