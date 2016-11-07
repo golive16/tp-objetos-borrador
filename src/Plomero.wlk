@@ -1,29 +1,19 @@
+import Contratista.*
 
-class Plomero {
-	var fecha = new Date()
-	var anioInicioActividad
+class Plomero inherits Contratista{
+	
 	var recargo = 0
 	var costoPorAmbiente = 100
 	var clientes = []
-	var complejidadRol = 2
 	
-	constructor(_anioInicioActividad) {
-		anioInicioActividad = _anioInicioActividad
-	}
-	
-	method costoServicio(casa){
-		if (self.antiguedad() == 2) {
-			return self.manoDeObra(casa) * 0.5			
-		} return self.manoDeObra(casa)
-	}
-	
-	method manoDeObra(casa){
+	override method costoBase(casa){
+		
 		if (casa.pisos() > 2){
 			return 100 * casa.ambientes().size() + (100 * casa.ambientes().size()) * (self.recargo() / 100)	
 		}
 		return 100 * casa.ambientes().size()
 	}
-		
+	
 	method costoPorAmbiente(){
 		return costoPorAmbiente
 	}
@@ -32,18 +22,13 @@ class Plomero {
 		recargo = _recargo
 	}
 	
-	method complejidad() {
-		return complejidadRol
-	}
-	
 	method recargo(){
 		return recargo
 	}
 	
 	method clientes(){
 		return clientes
-	}
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
+	} 
+
+
 }

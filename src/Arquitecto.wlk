@@ -1,26 +1,25 @@
 import Casa.*
 import Ambiente.*
-import Experiencia.*
+import Contratista.*
 
-class Arquitecto {
-	var fecha = new Date()
-	var anioInicioActividad
+class Arquitecto inherits Contratista {
+	
 	var costoPorAmbiente
 	var clientes = []
-	var complejidadRol = 5
-	var experiencia
 	
-	constructor(_costoPorAmbiente, _anioInicioActividad){
+	constructor(_costoPorAmbiente){
 		costoPorAmbiente = _costoPorAmbiente
-		anioInicioActividad = _anioInicioActividad		
 	}
-	
-	method costoServicio(casa){
-		return  self.manoDeObra(casa) + (self.manoDeObra(casa) * (self.antiguedad() / 100))
-	}
-	
-	method manoDeObra(casa) {
+	override method costoBase(casa) {
 		return casa.ambientes().size() * costoPorAmbiente * casa.pisos()
+	}
+	
+	override method recargoAntiguedad(){
+		return self.antiguedad() / 100
+	}
+	
+	override method complejidadRol(){
+		return 5
 	}
 	
 	method costoPorAmbiente(_costoPorAmbiente){
@@ -33,12 +32,6 @@ class Arquitecto {
 	
 	method clientes(){
 		return clientes
-	}
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
-	method complejidad(){
-		return complejidadRol
-	}
+	} 
 	
 }

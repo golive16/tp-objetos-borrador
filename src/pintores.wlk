@@ -1,21 +1,17 @@
 import pintura.*
+import Contratista.*
 
-object raul {
+object raul inherits Contratista {
 	
-	var fecha = new Date()
-	var anioInicioActividad = 2011
 	var pintura
 	var clientes = []
-	var complejidadRol = 2
 	
 	method manoDeObra(superficie){
 		return superficie * 25
 	}
 	
-	method costoServicio(casa){
-		if (self.antiguedad() == 2) {
-			return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) * 0.5			
-		} return return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
+	override method costoBase(casa){
+		return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
 	}
 	
 	method pintura(_pintura){
@@ -29,20 +25,12 @@ object raul {
 	method clientes(){
 		return clientes
 	}
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
-	method complejidad() {
-		return complejidadRol
-	}
 }
 
-object carlos {
-	var fecha = new Date()
-	var anioInicioActividad = 2013
+object carlos inherits Contratista {
+	
 	var pintura
 	var clientes = []
-	var complejidadRol = 2
 
 	method manoDeObra(superficie){
 		
@@ -53,10 +41,8 @@ object carlos {
 		return 500 + (adicional * 30)
 	}
 	
-	method costoServicio(casa){
-		if (self.antiguedad() == 2) {
-			return self.manoDeObra(casa.superficie())  * 0.5			
-		} return self.manoDeObra(casa.superficie()) 
+	override method costoBase(casa){
+		return self.manoDeObra(casa.superficie())
 	}
 	
 	method pintura(_pintura){
@@ -70,20 +56,12 @@ object carlos {
 	method clientes(){
 		return clientes
 	}
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
-	method complejidad() {
-		return complejidadRol
-	}
 }
 
-object venancio {
-	var fecha = new Date()
-	var anioInicioActividad = 2012
+object venancio inherits Contratista {
+	
 	var pintura
 	var clientes = []
-	var complejidadRol = 2
 
 	method manoDeObra(superficie){
 		
@@ -93,11 +71,9 @@ object venancio {
 		}
 		return 220 * (superficie.div(10)) + adicional 
 	}
-	
-	method costoServicio(casa){
-		if (self.antiguedad() == 2) {
-			return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) * 0.5			
-		} return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie()) 		
+
+	override method costoBase(casa) {
+		return self.manoDeObra(casa.superficie()) + pintura.costoPorSuperficie(casa.superficie())
 	}
 	
 	method pintura(_pintura){
@@ -110,12 +86,6 @@ object venancio {
 	
 	method clientes(){
 		return clientes
-	}
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
-	method complejidad() {
-		return complejidadRol
 	}
 }
  

@@ -1,12 +1,14 @@
 import Casa.*
+import Trabajo.*
 
 class Cliente {
+	
 	var ahorros
 	var casa
 	var gastos = []
 	var agencia
 	var contratistas = []
-	var trabajosRealizados = []
+	var trabajosContratados = []
 
 	method casa(_casa){
 		casa = _casa
@@ -21,38 +23,38 @@ class Cliente {
 	}
 
 	method contratar(contratista){
-		if(!self.puedeContratar(agencia.puedeContratarA(self.presupuesto(), self.casa()), contratista)){
-			return false
-		}
+		if(self.puedeContratar( contratista)){
 			ahorros -= contratista.costoServicio(self.casa())
 			self.registrarContratacion(contratista)
-			return true
+		}
 	}
 	
 	method tomoDePunto(contratista){
 		var fecha = new Date()
-		return self.trabajosRealizados().filter({trabajo => trabajo.contratista() == contratista})
+		return self.trabajosContratados().filter({trabajo => trabajo.contratista() == contratista})
 										.filter({trabajo => trabajo.fecha().month() == fecha.month()}).size() >= 2
 	}
 	
 	method montoTrabajosRealizados(fecha, contratista){
-		return self.trabajosRealizados().filter({trabajo => trabajo.contratista() == contratista})
-//														.filter({trabajo => trabajo.fecha().month() == fecha.month()})
+		return self.trabajosContratados().filter({trabajo => trabajo.contratista() == contratista})
+														.filter({trabajo => trabajo.fecha().month() == fecha.month()})
 														.map({trabajo => trabajo.gasto()}).sum()
 	}
 	
 	method registrarContratacion(contratista){
+			var trabajo = new Trabajo()
 			trabajo.gasto(contratista.costoServicio(self.casa()))
 			trabajo.contratista(contratista)
 			trabajo.fecha(new Date())
-			trabajosRealizados.add(trabajo)
+			trabajosContratados.add(trabajo)
 			gastos.add(contratista.costoServicio(casa))
 			contratista.clientes().add(self)
 			self.contratistas().add(contratista)
+			contratista.acumularExperiencia(casa)
 	}
 	
-	method puedeContratar(_contratistas, contratista){
-		return _contratistas.contains(contratista)
+	method puedeContratar(contratista){
+		return self.presupuesto() >= contratista.costoServicio(self.casa())
 	}
 	
 	method descuidado(){
@@ -83,39 +85,12 @@ class Cliente {
 		return contratistas
 	}
 	
-	method trabajosRealizados(){
-		return trabajosRealizados
+	method trabajosContratados(_trabajosContratados){
+		trabajosContratados = _trabajosContratados
+	}
+	method trabajosContratados(){
+		return trabajosContratados
 	}
 	
 }
 
-object trabajo {
-	
-	var gasto
-	var contratista
-	var fecha
-	
-	method fecha(){
-		return fecha
-	}
-	
-	method fecha(_fecha){
-		fecha = _fecha
-	}
-	
-	method contratista(_contratista){
-		contratista = _contratista
-	}
-	
-	method contratista(){
-		return contratista
-	}
-	
-	method gasto(){
-		return gasto
-	}
-	
-	method gasto(_gasto){
-		gasto = _gasto
-	}
-}

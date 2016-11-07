@@ -1,29 +1,32 @@
+import Contratista.*
+class MMdeObras inherits Contratista{
 
-class MMdeObras {
-	var fecha = new Date()
-	var anioInicioActividad
 	var costoPorAmbiente
 	var clientes = []
-	var complejidadRol = 3
 	
-	constructor(_costoPorAmbiente, _anioInicioActividad){
+	constructor(_costoPorAmbiente){
 		costoPorAmbiente = _costoPorAmbiente
-		anioInicioActividad = _anioInicioActividad		
 	}
 	
-	method costoServicio(casa) {
-		if (self.antiguedad() >= 5) {
-			return self.manoDeObra(casa) + (self.manoDeObra(casa) * 0.10)
-		} if (self.antiguedad() >= 10) {
-			return self.manoDeObra(casa) + (self.manoDeObra(casa) * 0.20)
-		} return self.manoDeObra(casa)
-	}
-	
-	method manoDeObra(casa) {
+	override method costoBase(casa){
 		if (casa.esComplicada()){
-			return self.costoPorAmbiente() * casa.ambientes().size() + (0.20 * self.costoPorAmbiente() * casa.ambientes().size())
+			return return self.costoPorAmbiente() * casa.ambientes().size() + (0.20 * self.costoPorAmbiente() * casa.ambientes().size()) 
+		} 
+		return return self.costoPorAmbiente() * casa.ambientes().size()
+	}
+	
+	override method recargoAntiguedad(){
+		if (self.antiguedad() > 10){
+			return 0.20
+		} else if (self.antiguedad() > 5){
+			return 0.10
+		} else {
+			return 0
 		}
-		return self.costoPorAmbiente() * casa.ambientes().size()
+	}
+	
+	override method complejidadRol(){
+		return 3
 	}
 	
 	method costoPorAmbiente(_costoPorAmbiente){
@@ -36,13 +39,6 @@ class MMdeObras {
 	
 	method clientes(){
 		return clientes
-	}
-	method complejidad() {
-		return complejidadRol
-	}
-	
-	method antiguedad(){
-		return fecha.year() - anioInicioActividad
-	}
+	} 
 
 }

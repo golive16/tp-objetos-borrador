@@ -10,8 +10,90 @@ import MMdeObras.*
 import Plomero.*
 import Electricista.*
 import Albanil.*
-import FixtureDeAldo.*
+import Trabajo.*
 
+object fixture {
+	
+  method aumentarAhorro(aldo, ahorro){
+  	 aldo.ahorros(aldo.ahorros() + ahorro)
+  }
+  
+  method aumentarPrecioLataPintura(pintura, nuevoPrecio){
+  	pintura.precio(nuevoPrecio)
+  }
+  
+  method aldoConAhorrosYCasa(){
+  	aldo.ahorros(6000)
+	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
+
+	var trabajo1 = new Trabajo()
+	var trabajosContratados = [] 
+	var maestro = new MMdeObras(53)
+	maestro.categorizar()
+	maestro.fechaInicioActividad(new Date())
+	
+	trabajo1.contratista(maestro)
+	trabajo1.gasto(3434)
+	trabajo1.fecha(new Date())
+	
+	var trabajo2 = new Trabajo()
+	var arquitecto = new Arquitecto(543)
+	arquitecto.categorizar()
+	arquitecto.fechaInicioActividad(new Date())
+	trabajo2.contratista(arquitecto)
+	trabajo2.gasto(334)
+	trabajo2.fecha(new Date())
+	
+	trabajosContratados.add(trabajo1)
+	trabajosContratados.add(trabajo2)
+
+	aldo.trabajosContratados(trabajosContratados)	
+	return aldo
+  }
+  
+  method agencia(){
+  	var emanuel = new Arquitecto(100000)
+  	emanuel.fechaInicioActividad(new Date())
+  	emanuel.categorizar()
+  	var marcos = new MMdeObras(50000)
+   	marcos.fechaInicioActividad(new Date())
+  	marcos.categorizar()
+  	var noelia = new Electricista(250)
+  	noelia.fechaInicioActividad(new Date())
+  	noelia.categorizar()
+  	var silvana = new Plomero()
+  	silvana.fechaInicioActividad(new Date())
+  	silvana.categorizar()
+	silvana.recargo(25)
+  	var eliana = new MMdeObras(12000)
+  	eliana.fechaInicioActividad(new Date())
+  	eliana.categorizar()
+  	var dodain = new Albanil(3)
+  	dodain.fechaInicioActividad(new Date())
+  	dodain.categorizar()
+	raul.pintura(pintura)
+	raul.fechaInicioActividad(new Date())
+  	raul.categorizar()
+  	raul.pintura(pintura)
+	venancio.fechaInicioActividad(new Date())
+  	venancio.categorizar()
+  	agencia.contratar(raul)
+  	carlos.fechaInicioActividad(new Date())
+  	carlos.categorizar()
+  	carlos.pintura(pintura)
+  	agencia.contratar(carlos)
+  	venancio.pintura(pintura)
+  	agencia.contratar(venancio)
+  	agencia.contratar(emanuel)
+  	agencia.contratar(marcos)
+  	agencia.contratar(noelia)
+  	agencia.contratar(silvana)
+  	agencia.contratar(eliana)
+  	agencia.contratar(dodain)
+
+  }
+  
+}
 
 test "la superficie total a pintar por aldo es 41" {
 	fixture.aldoConAhorrosYCasa()
@@ -27,6 +109,8 @@ test "el presupuesto maximo de aldo es 1200" {
 test "aldo no tiene suficientes ahorros para contratar a raul" {
 	fixture.aldoConAhorrosYCasa()
 	raul.pintura(pintura)
+	raul.fechaInicioActividad(new Date())
+	raul.categorizar()
 	assert.notThat(aldo.tienePresupuestoPara(raul))
 }
 
@@ -34,6 +118,8 @@ test "aldo si puede contratar a raul con 8000 de ahorros" {
 	fixture.aldoConAhorrosYCasa()
 	fixture.aumentarAhorro(aldo, 2000)
 	raul.pintura(pintura)
+	raul.fechaInicioActividad(new Date())
+	raul.categorizar()
 	assert.that(aldo.tienePresupuestoPara(raul))
 }
 
@@ -41,6 +127,8 @@ test "aldo no puede contratar a raul con ahorros de 7000 y precio de pintura a 4
 	fixture.aldoConAhorrosYCasa()
 	fixture.aumentarAhorro(aldo,1000)
 	fixture.aumentarPrecioLataPintura(pintura, 400)
+	raul.fechaInicioActividad(new Date())
+	raul.categorizar()
 	raul.pintura(pintura)
 	assert.notThat(aldo.tienePresupuestoPara(raul))
 }
@@ -48,12 +136,16 @@ test "aldo no puede contratar a raul con ahorros de 7000 y precio de pintura a 4
 test "aldo si puede contratar a Carlos" {
 	fixture.aldoConAhorrosYCasa()
 	carlos.pintura(pintura)
+	carlos.categorizar()
+	carlos.fechaInicioActividad(new Date())
 	assert.that(aldo.tienePresupuestoPara(carlos))
 }
 
 test "aldo no tiene presupuesto para contratar a Venancio" {
 	fixture.aldoConAhorrosYCasa()
 	venancio.pintura(pintura)
+	venancio.categorizar()
+	venancio.fechaInicioActividad(new Date())
 	assert.notThat(aldo.tienePresupuestoPara(venancio))
 }
 
@@ -61,6 +153,8 @@ test "aldo si tiene presupuesto para contratar a Venancio" {
 	fixture.aldoConAhorrosYCasa()
 	fixture.aumentarAhorro(aldo, 2000)
 	venancio.pintura(pintura)
+	venancio.categorizar()
+	venancio.fechaInicioActividad(new Date())
 	assert.that(aldo.tienePresupuestoPara(venancio))
 }
 
@@ -80,13 +174,18 @@ test "Aldo puede contratar a Carlos, Eduardo y Roger"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
 	
-	var roger =  new Plomero(2010)
-	var eduardo = new Electricista(100, 2012)
+	var roger =  new Plomero()
+	roger.categorizar()
+	roger.fechaInicioActividad(new Date())	
+	var eduardo = new Electricista(100)
+	eduardo.categorizar()
+	eduardo.fechaInicioActividad(new Date())
+	
 	fixture.agencia()
 	agencia.contratar(roger)
 	agencia.contratar(eduardo)
 
-	var contratados = aldo.agencia().puedeContratarA(aldo.presupuesto(), aldo.casa())
+	var contratados = aldo.agencia().puedeContratarA(aldo)
 	
 	assert.that(contratados.contains(roger))
 	assert.that(contratados.contains(eduardo))
@@ -97,7 +196,9 @@ test "Aldo puede contratar a Carlos, Eduardo y Roger"{
 test "Aldo contrata a roger y su presupuesto maximo ahora es 1160" {
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero(2012)
+	var roger =  new Plomero()
+	roger.categorizar()
+	roger.fechaInicioActividad(new Date())	
 	agencia.contratar(roger)
 	aldo.contratar(roger)
 	assert.equals(1160, aldo.presupuesto())
@@ -106,10 +207,14 @@ test "Aldo contrata a roger y su presupuesto maximo ahora es 1160" {
 test "Aldo contrata a Roger y a Carlos, obtiene 2 servicios" {
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero(2012)
+	var roger =  new Plomero()
+	roger.categorizar()
+	roger.fechaInicioActividad(new Date())	
 	agencia.contratar(roger)
+	carlos.categorizar()
+	carlos.fechaInicioActividad(new Date())
 	agencia.contratar(carlos)
-	var contratados = aldo.agencia().puedeContratarA(aldo.presupuesto(), aldo.casa())
+	var contratados = aldo.agencia().puedeContratarA(aldo)
 	assert.that(contratados.contains(roger))
 	assert.that(contratados.contains(carlos))
 }
@@ -117,17 +222,25 @@ test "Aldo contrata a Roger y a Carlos, obtiene 2 servicios" {
 test "Aldo no puede contratar a Marcos, no tiene presupuesto"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var marcos = new MMdeObras(50000, 2011)
+	var marcos = new MMdeObras(50000)
+	marcos.categorizar()
+	marcos.fechaInicioActividad(new Date())
 	agencia.contratar(marcos)
-	assert.notThat(aldo.contratar(marcos))
+	aldo.contratar(marcos)
+	assert.that(aldo.trabajosContratados().size()== 2)
+	//validar que no tengo un trabajo mas y que haya bajado mi presupuesto
 }
 
 test "Aldo contrata a Roger y a Carlos y no es descuidado"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
-	var roger =  new Plomero(2012)
+	var roger =  new Plomero()
+	roger.categorizar()
+	roger.fechaInicioActividad(new Date())
 	agencia.contratar(roger)
 	carlos.pintura(pintura)
+	carlos.categorizar()
+	carlos.fechaInicioActividad(new Date())
 	agencia.contratar(carlos)
 	aldo.contratar(roger)
 	aldo.contratar(carlos)
@@ -135,13 +248,18 @@ test "Aldo contrata a Roger y a Carlos y no es descuidado"{
 }
 
 test "Aldo ahorra 1000000, contrata a Marcos y si es descuidado" {
-	fixture.aldoConAhorrosYCasa()
+	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
 	aldo.ahorros(1000000)
 	aldo.agencia(agencia)
-	var marcos =  new MMdeObras(100000, 2011)
+	var marcos =  new MMdeObras(50000)
+	marcos.categorizar()
+	marcos.fechaInicioActividad(new Date())
 	agencia.contratar(marcos)
 	aldo.contratar(marcos)
+	
+	assert.that(aldo.trabajosContratados().size()==1)
 	assert.equals(1, aldo.gastos().size())
+	assert.that(aldo.presupuesto() < 200000)
 	assert.that(aldo.descuidado())
 }
 

@@ -4,7 +4,6 @@ class Casa {
 
 	var pisos 
 	var ambientes = []
-	var complejidad = 0
 	
 	constructor(_pisos, _ambientes){
 		pisos = _pisos
@@ -24,18 +23,17 @@ class Casa {
 	}
 	
 	method esComplicada(){
-		complejidad += 2
 		return self.ambientes().size() > 3
 	}
 	
 	method complejidad() {
-		if (self.pisos() == 1 || self.pisos() == 2) {
-			complejidad = 1
-			return complejidad
-		} else {
-			complejidad = 2
-			return complejidad
+
+		if (self.pisos() > 2){
+			return 3
+		} else if(self.esComplicada()){
+			return 2
 		}
+		return 1
 	}
 
 }

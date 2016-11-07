@@ -3,8 +3,8 @@ object agencia {
 
 	var contratistas = [] 
 	
-	method puedeContratarA(presupuesto, casa) {
-		return contratistas.filter({contratista => contratista.costoServicio(casa) <= presupuesto})
+	method puedeContratarA(cliente) {
+		return contratistas.filter({contratista => contratista.costoServicio(cliente.casa()) <= cliente.presupuesto()})
 	}
 	
 	method contratar(contratista){
@@ -13,7 +13,7 @@ object agencia {
 
 	method despedir(contratista){
 		contratistas.remove(contratista)
-	}
+	} 
 	
 	method contratistas(){
 		return contratistas

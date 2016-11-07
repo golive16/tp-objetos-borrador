@@ -12,7 +12,76 @@ import Electricista.*
 import Albanil.*
 import Damian.*
 import Milena.*
-import Fixture.*
+
+object fixture {
+
+	method agencia() {
+		var emanuel = new Arquitecto(100000)
+		var marcos = new MMdeObras(50000)
+		var eliana = new MMdeObras(12000)
+		raul.pintura(pintura)
+		agencia.contratar(raul)
+		carlos.pintura(pintura)
+		agencia.contratar(carlos)
+		venancio.pintura(pintura)
+		agencia.contratar(venancio)
+		agencia.contratar(emanuel)
+		agencia.contratar(marcos)
+		agencia.contratar(eliana)
+
+	}
+
+	method milena() {
+		return milena
+	}
+	method eliana() {
+		var mmo = new MMdeObras(12000)
+		mmo.fechaInicioActividad(new Date())
+		mmo.categorizar()
+		return mmo
+	}
+
+	method silvina() {
+		var plomero = new Plomero()
+		plomero.fechaInicioActividad(new Date())
+		plomero.categorizar()
+		return plomero
+	}
+	
+	method dodain(){
+		var albanil = new Albanil(3)
+		albanil.fechaInicioActividad(new Date())
+		albanil.categorizar()
+		return albanil
+	}
+
+	method noelia() {
+		var electricista = new Electricista(250)
+		electricista.fechaInicioActividad(new Date())
+		electricista.categorizar()
+		return electricista
+	}
+	method habitacion1() {
+		return new Ambiente(4, 3, 3)
+	}
+	method habitacion2() {
+		return new Ambiente(3, 2, 2)
+	}
+	method habitacion3() {
+		return new Ambiente(3, 2, 3)
+	}
+	method habitacion4() {
+		return new Ambiente(3, 4, 2)
+	}
+	method casaDeDamian() {
+		return new Casa(4, [self.habitacion1(), self.habitacion2(), self.habitacion3(), self.habitacion4()])
+	}
+	method casaDeMilena() {
+		return new Casa(3, [ self.habitacion1(), self.habitacion2() ])
+	}
+}
+
+
 
 test "El Costo de Noelia para la casa de Damian" {
 	var noelia = fixture.noelia()
@@ -44,12 +113,14 @@ test "Milena solo puede contratar a Silvina " {
 	
 	milena.casa(fixture.casaDeMilena())
 	milena.ahorros(2000)
-	var silvina = new Plomero(2011)
-		silvina.recargo(25)
+	var silvina = new Plomero()
+	silvina.fechaInicioActividad(new Date())
+	silvina.categorizar()
+	silvina.recargo(25)
 	
 	agencia.contratar(silvina)
 
-	var contratados = agencia.puedeContratarA(milena.presupuesto(), milena.casa())
+	var contratados = agencia.puedeContratarA(milena)
 	
 	assert.equals(1, contratados.size())
 	assert.that(contratados.contains(silvina))
@@ -59,16 +130,16 @@ test "Damian puede contratar a Noelia, Silvina y Dodain "{
 	
 	damian.casa(fixture.casaDeDamian())
 	damian.ahorros(250000)
-	var noelia = new Electricista(250, 2012)
-	var silvina = new Plomero(2011)
+	var noelia = new Electricista(250)
+	var silvina = new Plomero()
 		silvina.recargo(25)
-	var dodain = new Albanil(3, 2013)
+	var dodain = new Albanil(3)
 	
 	agencia.contratar(noelia)
 	agencia.contratar(silvina)
 	agencia.contratar(dodain)
 	
-	var contratados = agencia.puedeContratarA(damian.presupuesto(), damian.casa())
+	var contratados = agencia.puedeContratarA(damian)
 	
 	assert.equals(3, contratados.size())
 	assert.that(contratados.contains(noelia))
@@ -81,7 +152,7 @@ test "Damian ahorra 1500000, contrata a Eliana y Silvina y No es descuidado"{
 	damian.casa(fixture.casaDeDamian())
 	damian.ahorros(1500000)
 	
-	var silvina = new Plomero(2014)
+	var silvina = new Plomero()
 		silvina.recargo(25)
 	var eliana = fixture.eliana()
 	
@@ -100,12 +171,12 @@ test "Milena ahorra $1500000, contrata a Eliana y a Silvina, Damian Si fue descu
 	milena.casa(fixture.casaDeMilena())
 	milena.ahorros(1500000)
 	milena.agencia(agencia)
-	var eliana = new MMdeObras(12000, 2014)
-	var silvina = new Plomero(2015)
+	var eliana = new MMdeObras(12000)
+	var silvina = new Plomero()
 		silvina.recargo(25)
 	agencia.contratar(eliana)
 	agencia.contratar(silvina)
-	var contratados = agencia.puedeContratarA(milena.presupuesto(), milena.casa())
+	var contratados = agencia.puedeContratarA(milena)
 	assert.equals(2, contratados.size())
 	assert.that(contratados.contains(eliana))
 	assert.that(contratados.contains(silvina))
@@ -118,7 +189,7 @@ test "Milena contrata 2 veces a  Eliana y a Silvina"{
 	milena.ahorros(1500000)
 	milena.agencia(agencia)
 	
-	var silvina = new Plomero(2015)
+	var silvina = new Plomero()
 		silvina.recargo(25)
 	var eliana = fixture.eliana()
 	
@@ -142,7 +213,7 @@ test "Damian contrata a dodain y a Silvina y Dodain NO lo tomó de punto"{
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 	
-	var silvina = new Plomero(2015)
+	var silvina = new Plomero()
 		silvina.recargo(25)
 		
 	var dodain = fixture.dodain()
@@ -161,7 +232,7 @@ test "Damian contrata Dodain, a Silvina y nuevamente a Dodain y Dodain lo tomo d
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 	
-	var silvina = new Plomero(2014)
+	var silvina = new Plomero()
 	silvina.recargo(25)
 	var dodain = fixture.dodain()
 	
@@ -182,9 +253,9 @@ test "Damian contrate a Dodain, luego a Silvina y nuevamente a Dodain. Saber cua
 	damian.ahorros(250000)
 	damian.agencia(agencia)
 
-	var silvina = new Plomero(2014) 
+	var silvina = new Plomero() 
 		silvina.recargo(25)
-	var dodain = new Albanil(3, 2012) 
+	var dodain = new Albanil(3) 
 	
 	agencia.contratar(silvina)
 	agencia.contratar(dodain)
