@@ -1,15 +1,14 @@
 import experticias.*
-
 class Contratista {
 
-	var anioInicioActividad
+	var fechaInicioActividad
 	var experiencia = 0
 	var experticia
 	
 	method costoServicio(casa){
 		return self.costoBase(casa) +
 			   self.costoBase(casa) * self.recargoAntiguedad() +
- 			   self.costoBase(casa) * self.experticia().recargo()
+			   self.costoBase(casa) * self.experticia().recargo()
 	}
 	
 	//las subclases sobreescriben este método
@@ -19,19 +18,19 @@ class Contratista {
 	
 	method antiguedad(){
 		var fecha = new Date()
-		return fecha.year() - self.anioInicioActividad()
+		return fecha.year() - self.fechaInicioActividad().year()
 	}
 	
 	method recargoAntiguedad(){
 		return (self.antiguedad().div(2)) * 5
 	}
 	
-	method anioInicioActividad(){
-		return anioInicioActividad
+	method fechaInicioActividad(){
+		return fechaInicioActividad
 	}
 	
-	method anioInicioActividad(_anioInicioActividad){
-		anioInicioActividad = _anioInicioActividad
+	method fechaInicioActividad(_fechaInicioActividad){
+		fechaInicioActividad = _fechaInicioActividad
 	}
 	
 	method complejidadRol(){
