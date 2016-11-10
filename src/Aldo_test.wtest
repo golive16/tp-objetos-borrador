@@ -28,20 +28,20 @@ object fixture {
 
 	var trabajo1 = new Trabajo()
 	var trabajosContratados = [] 
-	var maestro = new MMdeObras(53)
+	var maestro = new MMdeObras(53.00)
 	maestro.categorizar()
 	maestro.fechaInicioActividad(new Date())
 	
 	trabajo1.contratista(maestro)
-	trabajo1.gasto(3434)
+	trabajo1.gasto(3434.00)
 	trabajo1.fecha(new Date())
 	
 	var trabajo2 = new Trabajo()
-	var arquitecto = new Arquitecto(543)
+	var arquitecto = new Arquitecto(543.00)
 	arquitecto.categorizar()
 	arquitecto.fechaInicioActividad(new Date())
 	trabajo2.contratista(arquitecto)
-	trabajo2.gasto(334)
+	trabajo2.gasto(334.00)
 	trabajo2.fecha(new Date())
 	
 	trabajosContratados.add(trabajo1)
@@ -52,20 +52,20 @@ object fixture {
   }
   
   method agencia(){
-  	var emanuel = new Arquitecto(100000)
+  	var emanuel = new Arquitecto(100000.00)
   	emanuel.fechaInicioActividad(new Date())
   	emanuel.categorizar()
-  	var marcos = new MMdeObras(50000)
+  	var marcos = new MMdeObras(50000.00)
    	marcos.fechaInicioActividad(new Date())
   	marcos.categorizar()
-  	var noelia = new Electricista(250)
+  	var noelia = new Electricista(250.00)
   	noelia.fechaInicioActividad(new Date())
   	noelia.categorizar()
   	var silvana = new Plomero()
   	silvana.fechaInicioActividad(new Date())
   	silvana.categorizar()
 	silvana.recargo(25.00)
-  	var eliana = new MMdeObras(12000)
+  	var eliana = new MMdeObras(12000.00)
   	eliana.fechaInicioActividad(new Date())
   	eliana.categorizar()
   	var dodain = new Albanil(3)
@@ -174,12 +174,13 @@ test "Aldo puede contratar a Carlos, Eduardo y Roger"{
 	fixture.aldoConAhorrosYCasa()
 	aldo.agencia(agencia)
 	
+	var fechaInicioActividad = new Date()
 	var roger =  new Plomero()
 	roger.categorizar()
-	roger.fechaInicioActividad(new Date())	
+	roger.fechaInicioActividad(fechaInicioActividad)	
 	var eduardo = new Electricista(100.00)
 	eduardo.categorizar()
-	eduardo.fechaInicioActividad(new Date())
+	eduardo.fechaInicioActividad(fechaInicioActividad)
 	
 	fixture.agencia()
 	agencia.contratar(roger)

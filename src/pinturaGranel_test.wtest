@@ -17,13 +17,19 @@ test "El costo de la pintura de una superficie de 250m2 es 875" {
 }
 
 test "Aldo si puede contratar a Raúl si Raúl trabaja con pintura a granel" {
+	var fechaInicioActividad = new Date()
 	aldo.ahorros(6000)
 	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
+	raul.fechaInicioActividad(fechaInicioActividad)
+	raul.categorizar()
 	raul.pintura(pinturaGranel)
 	assert.that(aldo.tienePresupuestoPara(raul))
 }
 
 test "Aldo no puede contratar a Venancio cuando trabaja con pintura a granel" {
+	var fechaInicioActividad = new Date()
+	venancio.fechaInicioActividad(fechaInicioActividad)
+	venancio.categorizar()
 	aldo.ahorros(6000)
 	aldo.casa(new Casa(1,[habitacion, new Ambiente(1,2,3.5)]))
 	venancio.pintura(pinturaGranel)
