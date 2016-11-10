@@ -15,14 +15,7 @@ import Milena.*
 
 object fixture {
 	
-	method anioInicioActividadDeEliana(){
-		return 2011
-	}
 
-	method anioInicioActividadDeMarcos(){
-		return 2013
-	}
-	
 	method agencia() {
 		var emanuel = new Arquitecto(100000)
 		var marcos = new MMdeObras(50000)

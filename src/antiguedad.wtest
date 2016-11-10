@@ -4,34 +4,42 @@ import Fixture.*
 
 test "Eliana es MMdeObras y tiene 5 años de antiguedad" {
 	var eliana = fixture.eliana()
-	var fecha = fixture.anioInicioActividadDeEliana()
-	eliana.anioInicioActividad(fecha)
+	var fechaInicioActividad = new Date(01,01,2011)
+	eliana.fechaInicioActividad(fechaInicioActividad)
 	assert.equals(5, eliana.antiguedad())
 
 }
 
-test "Marcos es Arquitecto, Experimentado, tiene 3 años de antiguedad y le cobra XXXX a Damian por su casa" {
-	var marcos = new Arquitecto(50000)
-	var fecha = fixture.anioInicioActividadDeMarcos()
+test "Roberto es Arquitecto, Experimentado, tiene 3 años de antiguedad y le cobra $824000 a Damian por su casa" {
+	var roberto = new Arquitecto(50000)
+	var fecha = new Date(01,01,2013)
 	var casaDeDamian = fixture.casaDeDamian()
-	marcos.anioInicioActividad(fecha)
-	marcos.experticia()
-	marcos.antiguedad()
-	assert.equals(3, marcos.antiguedad())
-	assert.equals(824000, marcos.costoServicio(casaDeDamian))
+	roberto.fechaInicioActividad(fecha)
+	roberto.categorizar()
+	roberto.antiguedad()
+	assert.equals(3, roberto.antiguedad())
+	assert.equals(824000, roberto.costoServicio(casaDeDamian))
 
 }
 
-//test "Marcos es MMdeObras con 5 años de experiencia y cuanto le cobra a Damian" {
-//	var marcos = new MMdeObras(50000)
-//	var casaDeDamian = fixture.casaDeDamian()
-//	assert.equals(264000, marcos.costoServicio(casaDeDamian))
-//	
-//}
-//
-//test "Pablo es MMdeObras con 10 años de experiencia y cuanto le cobra a Milena" {
-//	var pablo = new MMdeObras(50000)
-//	var casaDeMilena = fixture.casaDeMilena()
-//	assert.equals(110000, pablo.costoServicio(casaDeMilena))
-//	
-//}
+test "Marcos es MMdeObras con 5 años de experiencia y le cobra $240000 a Damian por su casa" {
+	var marcos = new MMdeObras(50000)
+	var fecha = new Date(01,01,2011)
+	var casaDeDamian = fixture.casaDeDamian()
+	marcos.fechaInicioActividad(fecha)
+	marcos.categorizar()
+	assert.equals(5, marcos.antiguedad())
+	assert.equals(240000, marcos.costoServicio(casaDeDamian))
+	
+}
+
+test "Pablo es Electricista con 10 años de experiencia y le cobra a $110000 a Milena por su casa" {
+	var pablo = new MMdeObras(50000)
+	var fecha = new Date(01,01,2006)
+	var casaDeMilena = fixture.casaDeMilena()
+	pablo.fechaInicioActividad(fecha)
+	pablo.categorizar()
+	assert.equals(10, pablo.antiguedad())
+	assert.equals(110000, pablo.costoServicio(casaDeMilena))
+	
+}
